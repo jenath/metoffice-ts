@@ -1,4 +1,7 @@
 import got from 'got'
+import promptSync from 'prompt-sync';
+
+const prompt = promptSync();
 
 const key = "20751907-9a70-44f2-90f0-a5396c53437f"
 const url = `http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=${key}`
@@ -25,3 +28,5 @@ interface SitelistResponse{
         Location: Location[]
     }
 }
+
+const question = prompt('Which city would you like to know the weather for?');
