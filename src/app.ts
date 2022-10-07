@@ -3,15 +3,21 @@ import promptSync from 'prompt-sync';
 
 const prompt = promptSync();
 
-const key = "20751907-9a70-44f2-90f0-a5396c53437f"
-const url = `http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=${key}`
+const key = '20751907-9a70-44f2-90f0-a5396c53437f';
+const id = '';
+const url = `http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=${key}`;
+const url2 = `http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/${id}?res=daily&key=${key}`;
 
-const json = await got.get(url).json() as SitelistResponse
-const locationNames = json.Locations.Location.map(location => location.name)
+const json = await got.get(url).json() as SitelistResponse;
+const locations = json.Locations.Location.map(location => ({ 
+    name: location.name,
+    id: location.id
+}));
 
-console.log(locationNames.join("\n"))
+locations.find()
+// const locationIds = json.Locations.Location.map(location => location.id);
 
-//console.log(JSON.stringify(json))
+
 
 interface Location{
     elevation: string,
@@ -29,4 +35,4 @@ interface SitelistResponse{
     }
 }
 
-const question = prompt('Which city would you like to know the weather for?');
+// const userInput = prompt('Which city would you like to know the weather for?');
